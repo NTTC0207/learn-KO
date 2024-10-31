@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <title>Learn KnockOut</title>
+</head>
+
+<body>
+  <div id="knockout-app">
+
+
+    <div class="input-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping">@</span>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+
+    <div class="card-section">
+      <div class="spinner-grow" role="status" data-bind="visible: isLoading()"> </div>
+      <span class="visually-hidden">Loading...</span>
+      <div data-bind="visible: !isLoading()">
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Height</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Eye Color</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: peopleList">
+            <!-- didnt write the function will invoke the function immediately when process the bindings -->
+            <tr data-bind="click: function() { $parent.displayPerson(`/${$index() + 1}`) }" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">
+              <td data-bind="text: $index()+1"></td>
+              <td data-bind="text: name"></td>
+              <td data-bind="text: height"></td>
+              <td data-bind="text: gender"></td>
+              <td data-bind="text: eye_color"></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div></div>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Detail</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex justify-content-center" data-bind="visible: detailLoader()">
+              <div class="spinner-border" role="status" data-bind="visible: detailLoader()">
+                <span class="visually-hidden" data-bind="visible: detailLoader()">Loading...</span>
+              </div>
+            </div>
+
+            <div data-bind="visible: !detailLoader()">
+              <div data-bind="with: personDetail">
+                <div data-bind="text: name"></div>
+                <div data-bind="text: height"></div>
+                <div data-bind="text: mass"></div>
+                <div data-bind="text: hair_color"></div>
+                <div data-bind="text: skin_color"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- <header>
+      Good Dog Walks Inc.
+    </header>
+    <div class="card-section">
+      <h2>Hello, <span data-bind="text: getFullName()"></span></h2>
+      <p>How many walks will we take today?</p>
+      <div class="counter-ui-container">
+        <button data-bind="click: handleDecrement()">-</button>
+        <span class="counter" data-bind="text: counter"></span>
+        <button data-bind="click: handleIncrement()">+</button>
+      </div>
+      <p>
+        Your dog is <span></span>
+      </p>
+    </div>
+    <footer>
+      <span>Have a tail wagging day!</span>
+    </footer>
+    <div> Input data binding</div>
+    <input data-bind="value: firstName" />
+    <input data-bind="value: lastName" />
+    <div>List data binding:</div>
+    <input data-bind="value: searchValue, valueUpdate: 'input'"/>
+    <button data-bind="click: handleSearch()">search</button>
+    <ul data-bind="foreach: filteredList">
+      <li data-bind="text: $data"></li>
+    </ul>
+    <input type="checkbox" value="dfdsf" data-bind="checked: show "/>
+    <label>Hello</label>
+    <div data-bind="visible: show">Appear</div> -->
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<!-- data-bind
+textInput instantly update the value when user type in input box -->
